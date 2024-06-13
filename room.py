@@ -2,7 +2,7 @@ class Room:
     def __init__(self, room_name):
         self.name = room_name
         self.description = None
-        self.linked_rooms = {}
+        self.__linked_rooms = {}
 
     @property
     def name(self):
@@ -24,12 +24,12 @@ class Room:
         print(self.description)
 
     def link_room(self, room_to_link, direction):
-        self.linked_rooms[direction] = room_to_link
+        self.__linked_rooms[direction] = room_to_link
 
     def get_details(self):
         print(self.name)
         print("-------------------------")
         print(self.description)
-        for direction in self.linked_rooms:
-            room = self.linked_rooms[direction]
+        for direction in self.__linked_rooms:
+            room = self.__linked_rooms[direction]
             print(f"The {room.name} is {direction}")
