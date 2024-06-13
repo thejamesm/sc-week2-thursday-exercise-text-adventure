@@ -26,7 +26,13 @@ class Player:
         self.__location = new_location
 
     def description(self):
-        return f"{self.name} is in the {self.location.name}"
+        return f"> {self.name} is in the {self.location.name}"
 
     def describe(self):
         print(self.description())
+
+    def move(self, direction):
+        if direction not in self.location.linked_rooms:
+            raise ValueError("Not a valid exit from the current location")
+        self.location = self.location.linked_rooms[direction]
+        print(f"> {self.name} moves {direction} to the {self.location.name}")

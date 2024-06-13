@@ -11,7 +11,9 @@ dining_hall.description = "A large room with ornate golden decorations"
 kitchen.two_way_link(dining_hall, "south")
 dining_hall.two_way_link(ballroom, "west")
 
-dining_hall.get_details()
-
 james = Player("James", kitchen)
 james.describe()
+james.location.get_details()
+
+james.move("south")
+james.location.get_details()

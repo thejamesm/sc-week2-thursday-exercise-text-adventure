@@ -48,6 +48,7 @@ class Room:
         room_to_link.link_room(self, Room.dir_opposites[direction])
 
     def get_details(self):
+        print("-------------------------")
         print(self.name)
         print("-------------------------")
         print(self.description)
