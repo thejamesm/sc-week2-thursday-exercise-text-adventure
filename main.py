@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 
 kitchen = Room("kitchen")
 kitchen.description = "A dank and dirty room buzzing with flies"
@@ -12,3 +12,6 @@ kitchen.two_way_link(dining_hall, "south")
 dining_hall.two_way_link(ballroom, "west")
 
 dining_hall.get_details()
+
+james = Player("James", kitchen)
+james.describe()
