@@ -35,7 +35,13 @@ class Room:
         return self.__linked_rooms
 
     def link_room(self, room_to_link, direction):
-        self.__linked_rooms[direction] = room_to_link
+        if direction not in Room.dir_opposites:
+            raise ValueError('Only cardinal directions '
+                             '("north", "east", "south", "west") allowed')
+        if room_to_link == self:
+            raise ValueError("Room cannot link to itself")
+        else:
+            self.__linked_rooms[direction] = room_to_link
 
     def two_way_link(self, room_to_link, direction):
         self.link_room(room_to_link, direction)
