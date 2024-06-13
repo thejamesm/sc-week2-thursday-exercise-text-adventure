@@ -30,6 +30,5 @@ class Room:
         print(self.name)
         print("-------------------------")
         print(self.description)
-        for direction in self.__linked_rooms:
-            room = self.__linked_rooms[direction]
+        for direction, room in self.__linked_rooms.items():
             print(f"The {room.name} is {direction}")
