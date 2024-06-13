@@ -11,9 +11,14 @@ dining_hall.description = "A large room with ornate golden decorations"
 kitchen.two_way_link(dining_hall, "south")
 dining_hall.two_way_link(ballroom, "west")
 
-james = Player("James", kitchen)
-james.describe()
-james.location.get_details()
+player_name = input("Enter player name: ")
+player = Player(player_name, kitchen)
 
-james.move("south")
-james.location.get_details()
+while True:
+    player.describe()
+    player.location.get_details()
+    direction = input("Which direction do you want to move? ").lower()
+    try:
+        player.move(direction)
+    except ValueError:
+        print("!!Invalid direction!!")
