@@ -33,3 +33,10 @@ class Room:
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print(f"The {room.name} is {direction}")
+
+    def move(self, direction):
+        if direction in self.linked_rooms:
+            return self.linked_rooms[direction]
+        else:
+            print("You can't go that way")
+            return self
