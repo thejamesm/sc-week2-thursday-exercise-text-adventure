@@ -19,14 +19,19 @@ key.description = "A shiny key"
 key.describe()
 
 dave = Enemy("Dave", "A smelly zombie")
-dave.conversation = "Brains...."
+dave.conversation = "Brrlgrh... rgrhl... brains..."
+dave.weakness = "cheese"
 
-dave.describe()
-dave.talk()
+dining_hall.character = dave
 
 current_room = kitchen
 while True:
     print("\n")
     current_room.get_details()
+
+    inhabitant = current_room.character
+    if inhabitant is not None:
+        inhabitant.describe()
+
     command = input("> ")
     current_room = current_room.move(command)
