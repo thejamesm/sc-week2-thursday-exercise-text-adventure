@@ -1,6 +1,6 @@
 from room import Room
 from item import Item
-from character import Character
+from character import Enemy
 
 kitchen = Room("kitchen")
 kitchen.description = "A dank and dirty room buzzing with flies"
@@ -18,7 +18,7 @@ key = Item("key")
 key.description = "A shiny key"
 key.describe()
 
-dave = Character("Dave", "A smelly zombie")
+dave = Enemy("Dave", "A smelly zombie")
 dave.conversation = "Brains...."
 
 dave.describe()
