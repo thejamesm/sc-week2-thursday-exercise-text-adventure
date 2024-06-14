@@ -19,7 +19,10 @@ key.description = "A shiny key"
 key.describe()
 
 dave = Character("Dave", "A smelly zombie")
+dave.conversation = "Brains...."
+
 dave.describe()
+dave.talk()
 
 current_room = kitchen
 while True:
