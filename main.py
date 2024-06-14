@@ -1,5 +1,6 @@
 from room import Room
 from item import Item
+from character import Enemy
 
 kitchen = Room("kitchen")
 kitchen.description = "A dank and dirty room buzzing with flies"
@@ -17,9 +18,20 @@ key = Item("key")
 key.description = "A shiny key"
 key.describe()
 
+dave = Enemy("Dave", "A smelly zombie")
+dave.conversation = "Brrlgrh... rgrhl... brains..."
+dave.weakness = "cheese"
+
+dining_hall.character = dave
+
 current_room = kitchen
 while True:
     print("\n")
     current_room.get_details()
+
+    inhabitant = current_room.character
+    if inhabitant is not None:
+        inhabitant.describe()
+
     command = input("> ")
     current_room = current_room.move(command)
