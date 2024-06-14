@@ -1,5 +1,6 @@
 from room import Room
 from item import Item
+from character import Character
 
 kitchen = Room("kitchen")
 kitchen.description = "A dank and dirty room buzzing with flies"
@@ -16,6 +17,9 @@ ballroom.link_room(dining_hall, "east")
 key = Item("key")
 key.description = "A shiny key"
 key.describe()
+
+dave = Character("Dave", "A smelly zombie")
+dave.describe()
 
 current_room = kitchen
 while True:
