@@ -8,10 +8,8 @@ ballroom.description = "A vast room with a shiny wooden floor"
 dining_hall = Room("dining hall")
 dining_hall.description = "A large room with ornate golden decorations"
 
-kitchen.link_room(dining_hall, "south")
-dining_hall.link_room(kitchen, "north")
-dining_hall.link_room(ballroom, "west")
-ballroom.link_room(dining_hall, "east")
+kitchen.two_way_link(dining_hall, "south")
+dining_hall.two_way_link(ballroom, "west")
 
 key = Item("key")
 key.description = "A shiny key"
