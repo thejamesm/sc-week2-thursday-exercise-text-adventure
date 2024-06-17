@@ -3,6 +3,23 @@ from item import Item
 from inventory import Inventory
 from character import Enemy, Friend
 
+command_aliases = {
+    "n": "north",
+    "e": "east",
+    "s": "south",
+    "w": "west",
+    "rob": "steal",
+    "take": "steal",
+    "open": "unlock",
+    "inv": "inventory",
+    "i": "inventory",
+    "items": "inventory",
+    "pockets": "inventory",
+    "pocket": "inventory",
+    "bag": "inventory",
+    "exit": "quit"
+}
+
 inventory = Inventory()
 
 kitchen = Room("kitchen")
@@ -49,6 +66,9 @@ while True:
 
     command = input("> ").lower()
     print()
+
+    if command in command_aliases:
+        command = command_aliases[command]
 
     if command in ("north", "east", "south", "west"):
         current_room = current_room.move(command)
@@ -108,9 +128,9 @@ while True:
                 print("You decide to go somewhere else instead")
         else:
             print("There are no locked doors here")
-    elif command in ("inventory", "items", "pockets", "bag"):
+    elif command == "inventory":
         inventory.list_inventory()
-    elif command in ("quit", "exit"):
+    elif command == "quit":
         exit()
     else:
         print(f"I don't understand \"{command}\"")

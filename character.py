@@ -90,6 +90,7 @@ class Enemy(Character):
                 print(f"{self.name} drops a {self.item.name}")
             return True, self.item
         else:
+            print()
             print(f"{self.name} crushes  you, puny adventurer")
             return False, None
 

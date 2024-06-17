@@ -30,7 +30,7 @@ class Inventory:
         print("The contents of your pockets")
         print("----------------------------")
         if not self.is_empty():
-            for n, item in enumerate(self.__items):
+            for n, item in enumerate(self.__items, 1):
                 print(f"{n}: {item.name}")
         else:
             print("Nothing")
@@ -45,11 +45,12 @@ class Inventory:
                 if user_choice == "C":
                     return None
                 try:
-                    return self.__items[int(user_choice)]
-                except (IndexError, ValueError):
+                    item_index = int(user_choice) - 1
+                    assert item_index >= 0
+                    return self.__items[item_index]
+                except (IndexError, ValueError, AssertionError):
                     print()
                     print("Invalid choice")
-                    print()
                     continue
         else:
             print("Your pockets are empty")
