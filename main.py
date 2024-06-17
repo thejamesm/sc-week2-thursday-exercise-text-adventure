@@ -52,5 +52,7 @@ while True:
                 exit()
         else:
             print("There's nobody here")
+    elif command in ("quit", "exit"):
+        exit()
     else:
         print(f"I don't understand \"{command}\"")
