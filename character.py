@@ -78,11 +78,14 @@ class Enemy(Character):
 
     @weakness.setter
     def weakness(self, item_weakness):
-        self.__weakness = item_weakness
+        if isinstance(item_weakness, Item) or item_weakness is None:
+            self.__weakness = item_weakness
+        else:
+            raise TypeError("Weakness must be an Item")
 
     def fight(self, combat_item):
         if combat_item == self.weakness:
-            print(f"You fend {self.name} off with the {combat_item}")
+            print(f"You fend {self.name} off with the {combat_item.name}")
             if self.item:
                 print(f"{self.name} drops a {self.item.name}")
             return True, self.item

@@ -38,12 +38,12 @@ class Inventory:
     def choose_item(self):
         if not self.is_empty():
             while True:
+                self.list_inventory()
                 print("C: Cancel")
                 print()
-                print("Choose an item")
-                user_choice = input("> ").upper()
+                user_choice = input("Choose an item > ").upper()
                 if user_choice == "C":
-                    return False
+                    return None
                 try:
                     return self.__items[int(user_choice)]
                 except (IndexError, ValueError):
@@ -53,4 +53,4 @@ class Inventory:
                     continue
         else:
             print("Your pockets are empty")
-            return False
+            return None

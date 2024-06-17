@@ -34,8 +34,21 @@ class Room:
         self.__locked = lock_status
 
     @property
+    def locked_doors(self):
+        return {direction: room for direction, room in self.linked_rooms.items()
+                if room.locked}
+
+    @property
     def key(self):
         return self.__key
+
+    @property
+    def character(self):
+        return self.__character
+
+    @character.setter
+    def character(self, new_character):
+        self.__character = new_character
 
     @key.setter
     def key(self, key_item):
@@ -59,14 +72,6 @@ class Room:
                 return False
         else:
             raise TypeError("Key must be an Item")
-
-    @property
-    def character(self):
-        return self.__character
-
-    @character.setter
-    def character(self, new_character):
-        self.__character = new_character
 
     def describe(self):
         print(self.description)

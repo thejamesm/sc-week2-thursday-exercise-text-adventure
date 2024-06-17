@@ -26,7 +26,7 @@ key = Item("key", "A shiny silver key")
 
 dave = Enemy("Dave", "A smelly zombie")
 dave.conversation = "Brrlgrh... rgrhl... brains..."
-dave.weakness = "cheese"
+dave.weakness = cheese
 dave.item = key
 
 catrina = Friend("Catrina", "A friendly skeleton")
@@ -60,18 +60,21 @@ while True:
     elif command == "fight":
         if inhabitant:
             print("What will you fight with?")
-            combat_item = input("> ")
-            combat_result, dropped_item = inhabitant.fight(combat_item)
-            if combat_result:
-                if isinstance(inhabitant, Enemy):
-                    current_room.character = None
-                    if dropped_item:
-                        inventory.add_item(dropped_item)
+            combat_item = inventory.choose_item()
+            if combat_item:
+                combat_result, dropped_item = inhabitant.fight(combat_item)
+                if combat_result:
+                    if isinstance(inhabitant, Enemy):
+                        current_room.character = None
+                        if dropped_item:
+                            inventory.add_item(dropped_item)
+                else:
+                    print()
+                    print("~~~ You lose! ~~~")
+                    print()
+                    exit()
             else:
-                print()
-                print("~~~ You lose! ~~~")
-                print()
-                exit()
+                print("You decide it would be better not to fight right now")
         else:
             print("There's nobody here")
     elif command == "steal":
@@ -86,6 +89,25 @@ while True:
             inhabitant.hug()
         else:
             print("There's nobody here that you want to hug")
+    elif command == "unlock":
+        locked_doors = current_room.locked_doors
+        if len(locked_doors) > 0:
+            if len(locked_doors) > 1:
+                direction = ""
+                while direction not in locked_doors:
+                    print("Which door do you want to unlock?")
+                    direction = input("> ")
+            else:
+                direction = tuple(locked_doors.keys())[0]
+            print("What will you use?")
+            key_item = inventory.choose_item()
+            if key_item:
+                if locked_doors[direction].unlock(key_item):
+                    current_room = current_room.move(direction)
+            else:
+                print("You decide to go somewhere else instead")
+        else:
+            print("There are no locked doors here")
     elif command in ("inventory", "items", "pockets", "bag"):
         inventory.list_inventory()
     elif command in ("quit", "exit"):
