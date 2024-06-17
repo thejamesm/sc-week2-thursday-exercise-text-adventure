@@ -29,7 +29,7 @@ while True:
     if inhabitant is not None:
         inhabitant.describe()
 
-    command = input("> ")
+    command = input("> ").lower()
     print()
 
     if command in ("north", "east", "south", "west"):
