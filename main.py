@@ -14,10 +14,6 @@ dining_hall.link_room(kitchen, "north")
 dining_hall.link_room(ballroom, "west")
 ballroom.link_room(dining_hall, "east")
 
-key = Item("key")
-key.description = "A shiny key"
-key.describe()
-
 dave = Enemy("Dave", "A smelly zombie")
 dave.conversation = "Brrlgrh... rgrhl... brains..."
 dave.weakness = "cheese"
@@ -26,7 +22,7 @@ dining_hall.character = dave
 
 current_room = kitchen
 while True:
-    print("\n")
+    print()
     current_room.get_details()
 
     inhabitant = current_room.character
@@ -34,4 +30,21 @@ while True:
         inhabitant.describe()
 
     command = input("> ")
-    current_room = current_room.move(command)
+    print()
+
+    if command in ("north", "east", "south", "west"):
+        current_room = current_room.move(command)
+    elif command == "talk":
+        if inhabitant:
+            inhabitant.talk()
+        else:
+            print("There's nobody here")
+    elif command == "fight":
+        if inhabitant:
+            print("What will you fight with?")
+            combat_item = input("> ")
+            inhabitant.fight(combat_item)
+        else:
+            print("There's nobody here")
+    else:
+        print(f"I don't understand \"{command}\"")
