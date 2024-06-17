@@ -1,8 +1,11 @@
+from item import Item
+
 class Character:
     def __init__(self, char_name, char_description):
         self.name = char_name
         self.description = char_description
         self.conversation = None
+        self.item = None
 
     @property
     def name(self):
@@ -28,6 +31,17 @@ class Character:
     def conversation(self, new_conversation):
         self.__conversation = new_conversation
 
+    @property
+    def item(self):
+        return self.__item
+
+    @item.setter
+    def item(self, new_item):
+        if isinstance(new_item, Item) or new_item is None:
+            self.__item = new_item
+        else:
+            raise TypeError("Character item must be of Item class")
+
     def describe(self):
         print(self.name, "is here!")
         print(self.description)
@@ -40,7 +54,17 @@ class Character:
 
     def fight(self, combat_item):
         print(self.name, "doesn't want to fight with you")
-        return True
+        return True, None
+
+    def steal(self):
+        if self.item:
+            theft_item = self.item
+            self.item = None
+            print(f"You steal a {theft_item.name} from {self.name}")
+            return theft_item
+        else:
+            print(f"{self.name} isn't carrying anything")
+            return None
 
 
 class Enemy(Character):
@@ -59,7 +83,21 @@ class Enemy(Character):
     def fight(self, combat_item):
         if combat_item == self.weakness:
             print(f"You fend {self.name} off with the {combat_item}")
-            return True
+            if self.item:
+                print(f"{self.name} drops a {self.item.name}")
+            return True, self.item
         else:
-            print(self.name, "crushes  you, puny adventurer")
-            return False
+            print(f"{self.name} crushes  you, puny adventurer")
+            return False, None
+
+
+class Friend(Character):
+    def __init__(self, char_name, char_description):
+        super().__init__(char_name, char_description)
+
+    def hug(self):
+        print(f"You give {self.name} a big hug")
+
+    def fight(self, combat_item):
+        print("You would never fight a friend!")
+        return True, None
