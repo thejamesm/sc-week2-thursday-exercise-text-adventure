@@ -1,8 +1,12 @@
+from item import Item
+
 class Room:
     def __init__(self, room_name):
         self.name = room_name
         self.description = None
         self.linked_rooms = {}
+        self.locked = False
+        self.key = None
         self.character = None
 
     @property
@@ -22,12 +26,52 @@ class Room:
         self.__description = new_description
 
     @property
+    def locked(self):
+        return self.__locked
+
+    @locked.setter
+    def locked(self, lock_status):
+        self.__locked = lock_status
+
+    @property
+    def locked_doors(self):
+        return {direction: room for direction, room in self.linked_rooms.items()
+                if room.locked}
+
+    @property
+    def key(self):
+        return self.__key
+
+    @property
     def character(self):
         return self.__character
 
     @character.setter
     def character(self, new_character):
         self.__character = new_character
+
+    @key.setter
+    def key(self, key_item):
+        if isinstance(key_item, Item) or key_item is None:
+            self.__key = key_item
+        else:
+            raise TypeError("Key must be an Item")
+
+    def lock(self, key_item):
+        self.locked = True
+        self.key = key_item
+
+    def unlock(self, key_item):
+        if isinstance(key_item, Item):
+            if key_item == self.key:
+                self.locked = False
+                print(f"You open the door with the {key_item.name}")
+                return True
+            else:
+                print(f"The {key_item.name} doesn't open this door")
+                return False
+        else:
+            raise TypeError("Key must be an Item")
 
     def describe(self):
         print(self.description)
@@ -37,7 +81,7 @@ class Room:
 
     def get_details(self):
         print(self.name)
-        print("-------------------------")
+        print("----------------------------")
         print(self.description)
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
@@ -45,7 +89,12 @@ class Room:
 
     def move(self, direction):
         if direction in self.linked_rooms:
-            return self.linked_rooms[direction]
+            destination = self.linked_rooms[direction]
+            if destination.locked:
+                print(f"The door to the {destination.name} is locked")
+                return self
+            else:
+                return destination
         else:
             print("You can't go that way")
             return self
