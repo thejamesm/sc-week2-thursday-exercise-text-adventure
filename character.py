@@ -54,13 +54,13 @@ class Character:
 
     def fight(self, combat_item):
         print(self.name, "doesn't want to fight with you")
-        return (True, None)
+        return True, None
 
     def steal(self):
         if self.item:
             theft_item = self.item
             self.item = None
-            print(f"You stole a {theft_item.name} from {self.name}")
+            print(f"You steal a {theft_item.name} from {self.name}")
             return theft_item
         else:
             print(f"{self.name} isn't carrying anything")
@@ -85,7 +85,19 @@ class Enemy(Character):
             print(f"You fend {self.name} off with the {combat_item}")
             if self.item:
                 print(f"{self.name} drops a {self.item.name}")
-            return (True, self.item)
+            return True, self.item
         else:
             print(f"{self.name} crushes  you, puny adventurer")
-            return (False, None)
+            return False, None
+
+
+class Friend(Character):
+    def __init__(self, char_name, char_description):
+        super().__init__(char_name, char_description)
+
+    def hug(self):
+        print(f"You give {self.name} a big hug")
+
+    def fight(self, combat_item):
+        print("You would never fight a friend!")
+        return True, None

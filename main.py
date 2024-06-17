@@ -1,6 +1,6 @@
 from room import Room
 from item import Item
-from character import Character, Enemy
+from character import Enemy, Friend
 
 player_items = []
 
@@ -17,12 +17,14 @@ dining_hall.link_room(ballroom, "west")
 ballroom.link_room(dining_hall, "east")
 
 cheese = Item("cheese", "A pungent block of cheese")
+key = Item("key", "A shiny silver key")
 
 dave = Enemy("Dave", "A smelly zombie")
 dave.conversation = "Brrlgrh... rgrhl... brains..."
 dave.weakness = "cheese"
+dave.item = key
 
-catrina = Character("Catrina", "A friendly skeleton")
+catrina = Friend("Catrina", "A friendly skeleton")
 catrina.conversation = "Hi, how are you?"
 catrina.item = cheese
 
@@ -72,6 +74,11 @@ while True:
                 player_items.append(stolen_item)
         else:
             print("There's nobody here")
+    elif command == "hug":
+        if inhabitant and isinstance(inhabitant, Friend):
+            inhabitant.hug()
+        else:
+            print("There's nobody here that you want to hug")
     elif command in ("quit", "exit"):
         exit()
     else:
