@@ -1,8 +1,9 @@
 from room import Room
 from item import Item
+from inventory import Inventory
 from character import Enemy, Friend
 
-player_items = []
+inventory = Inventory()
 
 kitchen = Room("kitchen")
 kitchen.description = "A dank and dirty room buzzing with flies"
@@ -65,7 +66,7 @@ while True:
                 if isinstance(inhabitant, Enemy):
                     current_room.character = None
                     if dropped_item:
-                        player_items.append(dropped_item)
+                        inventory.add_item(dropped_item)
             else:
                 print()
                 print("~~~ You lose! ~~~")
@@ -77,7 +78,7 @@ while True:
         if inhabitant:
             stolen_item = inhabitant.steal()
             if stolen_item:
-                player_items.append(stolen_item)
+                inventory.add_item(stolen_item)
         else:
             print("There's nobody here")
     elif command == "hug":
@@ -85,6 +86,8 @@ while True:
             inhabitant.hug()
         else:
             print("There's nobody here that you want to hug")
+    elif command in ("inventory", "items", "pockets", "bag"):
+        inventory.list_inventory()
     elif command in ("quit", "exit"):
         exit()
     else:
