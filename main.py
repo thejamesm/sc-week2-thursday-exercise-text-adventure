@@ -43,7 +43,13 @@ while True:
         if inhabitant:
             print("What will you fight with?")
             combat_item = input("> ")
-            inhabitant.fight(combat_item)
+            if inhabitant.fight(combat_item):
+                current_room.character = None
+            else:
+                print()
+                print("~~~ You lose! ~~~")
+                print()
+                exit()
         else:
             print("There's nobody here")
     else:
