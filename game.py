@@ -30,6 +30,7 @@ class Game:
             "steal": self.steal,
             "hug": self.hug,
             "unlock": self.unlock,
+            "inventory": self.list_inventory,
             "quit": self.quit
         }
         self.game_loop()
