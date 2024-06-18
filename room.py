@@ -1,10 +1,18 @@
 from item import Item
 
 class Room:
+    directions = ("north", "east", "south", "west")
+    dir_opposites = {
+        "north": "south",
+        "east": "west",
+        "south": "north",
+        "west": "east"
+    }
+
     def __init__(self, room_name):
         self.name = room_name
         self.description = None
-        self.linked_rooms = {}
+        self.__linked_rooms = {}
         self.locked = False
         self.key = None
         self.character = None
@@ -35,7 +43,8 @@ class Room:
 
     @property
     def locked_doors(self):
-        return {direction: room for direction, room in self.linked_rooms.items()
+        return {direction: room
+                for direction, room in self.linked_rooms.items()
                 if room.locked}
 
     @property
@@ -76,15 +85,29 @@ class Room:
     def describe(self):
         print(self.description)
 
+    @property
+    def linked_rooms(self):
+        return self.__linked_rooms
+
     def link_room(self, room_to_link, direction):
-        self.linked_rooms[direction] = room_to_link
+        if not isinstance(room_to_link, Room):
+            raise TypeError("Rooms can only link to other Rooms")
+        if direction not in Room.directions:
+            raise ValueError(f"Not a permitted direction {Room.directions}")
+        if room_to_link == self:
+            raise ValueError("Room cannot link to itself")
+        else:
+            self.__linked_rooms[direction] = room_to_link
+
+    def two_way_link(self, room_to_link, direction):
+        self.link_room(room_to_link, direction)
+        room_to_link.link_room(self, Room.dir_opposites[direction])
 
     def get_details(self):
         print(self.name)
         print("----------------------------")
         print(self.description)
-        for direction in self.linked_rooms:
-            room = self.linked_rooms[direction]
+        for direction, room in self.linked_rooms.items():
             print(f"The {room.name} is {direction}")
 
     def move(self, direction):

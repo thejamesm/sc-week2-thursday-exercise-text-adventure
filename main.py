@@ -12,12 +12,9 @@ dining_hall.description = "A large room with ornate golden decorations"
 garden = Room("garden")
 garden.description = "You made it to the garden. You win!"
 
-kitchen.link_room(dining_hall, "south")
-dining_hall.link_room(kitchen, "north")
-dining_hall.link_room(ballroom, "west")
-dining_hall.link_room(garden, "east")
-ballroom.link_room(dining_hall, "east")
-garden.link_room(dining_hall, "west")
+kitchen.two_way_link(dining_hall, "south")
+dining_hall.two_way_link(ballroom, "west")
+dining_hall.two_way_link(garden, "east")
 
 cheese = Item("cheese", "A pungent block of cheese")
 key = Item("key", "A shiny silver key")
