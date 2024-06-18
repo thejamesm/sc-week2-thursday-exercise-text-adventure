@@ -6,7 +6,7 @@ class Room:
     def __init__(self, room_name):
         self.name = room_name
         self.description = None
-        self.linked_rooms = {}
+        self.__linked_rooms = {}
         self.locked = False
         self.key = None
         self.character = None
@@ -37,7 +37,8 @@ class Room:
 
     @property
     def locked_doors(self):
-        return {direction: room for direction, room in self.linked_rooms.items()
+        return {direction: room
+                for direction, room in self.__linked_rooms.items()
                 if room.locked}
 
     @property
@@ -86,18 +87,18 @@ class Room:
         if room_to_link == self:
             raise ValueError("Room cannot link to itself")
         else:
-            self.linked_rooms[direction] = room_to_link
+            self.__linked_rooms[direction] = room_to_link
 
     def get_details(self):
         print(self.name)
         print("----------------------------")
         print(self.description)
-        for direction, room in self.linked_rooms.items():
+        for direction, room in self.__linked_rooms.items():
             print(f"The {room.name} is {direction}")
 
     def move(self, direction):
-        if direction in self.linked_rooms:
-            destination = self.linked_rooms[direction]
+        if direction in self.__linked_rooms:
+            destination = self.__linked_rooms[direction]
             if destination.locked:
                 print(f"The door to the {destination.name} is locked")
                 return self
