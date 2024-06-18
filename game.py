@@ -115,11 +115,13 @@ class Game:
             print("What will you use?")
             key_item = self.__inventory.choose_item()
             if key_item:
-                locked_doors[direction].unlock(key_item)
+                return locked_doors[direction].unlock(key_item)
             else:
                 print("You decide to go somewhere else instead")
+                return False
         else:
             print("There are no locked doors here")
+            return False
 
     def list_inventory(self):
         self.__inventory.list_inventory()
