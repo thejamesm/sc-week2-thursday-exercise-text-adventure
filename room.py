@@ -9,9 +9,9 @@ class Room:
         "west": "east"
     }
 
-    def __init__(self, room_name):
+    def __init__(self, room_name, room_description):
         self.name = room_name
-        self.description = None
+        self.description = room_description
         self.__linked_rooms = {}
         self.locked = False
         self.key = None
