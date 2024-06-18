@@ -1,10 +1,10 @@
 from item import Item
 
 class Inventory:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__items = []
 
-    def add_item(self, new_item):
+    def add_item(self, new_item) -> None:
         if isinstance(new_item, Item):
             if new_item not in self.__items:
                 self.__items.append(new_item)
@@ -13,7 +13,7 @@ class Inventory:
         else:
             raise TypeError("Inventory can only contain Items")
 
-    def remove_item(self, dropped_item):
+    def remove_item(self, dropped_item) -> None:
         if isinstance(dropped_item, Item):
             if dropped_item in self.__items:
                 self.__items.remove(dropped_item)
@@ -22,10 +22,10 @@ class Inventory:
         else:
             raise TypeError("Can only remove Items from Inventory")
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         return len(self.__items) == 0
 
-    def list_inventory(self):
+    def list_inventory(self) -> None:
         print()
         print("The contents of your pockets")
         print("----------------------------")
@@ -35,7 +35,7 @@ class Inventory:
         else:
             print("Nothing")
 
-    def choose_item(self):
+    def choose_item(self) -> Item | None:
         if not self.is_empty():
             while True:
                 self.list_inventory()

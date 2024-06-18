@@ -20,7 +20,7 @@ class Game:
         "exit": "quit"
     }
 
-    def __init__(self, start_room):
+    def __init__(self, start_room) -> None:
         self.__room = start_room
         self.__inventory = Inventory()
         self.commands = {
@@ -35,7 +35,7 @@ class Game:
         }
         self.game_loop()
 
-    def game_loop(self):
+    def game_loop(self) -> None:
         while True:
             print()
             self.__room.get_details()
@@ -45,7 +45,7 @@ class Game:
             print()
             self.execute_command(command)
 
-    def execute_command(self, command):
+    def execute_command(self, command) -> None:
         if command in Game.command_aliases:
             command = Game.command_aliases[command]
         if command in Game.directions:
@@ -55,16 +55,16 @@ class Game:
         else:
             print(f"I don't understand \"{command}\"")
 
-    def move(self, direction):
+    def move(self, direction) -> None:
         self.__room = self.__room.move(direction)
 
-    def talk(self):
+    def talk(self) -> None:
         if self.__room.character:
             self.__room.character.talk()
         else:
             print("There's nobody here")
 
-    def fight(self):
+    def fight(self) -> None:
         character = self.__room.character
         if character:
             print("What will you fight with?")
@@ -86,7 +86,7 @@ class Game:
         else:
             print("There's nobody here")
 
-    def steal(self):
+    def steal(self) -> None:
         if self.__room.character:
             stolen_item = self.__room.character.steal()
             if stolen_item:
@@ -94,14 +94,14 @@ class Game:
         else:
             print("There's nobody here")
 
-    def hug(self):
+    def hug(self) -> None:
         character = self.__room.character
         if character and isinstance(character, Friend):
             character.hug()
         else:
             print("There's nobody here that you want to hug")
 
-    def unlock(self):
+    def unlock(self) -> None:
         current_room = self.__room
         locked_doors = current_room.locked_doors
         if len(locked_doors) > 0:
@@ -123,8 +123,8 @@ class Game:
             print("There are no locked doors here")
             return False
 
-    def list_inventory(self):
+    def list_inventory(self) -> None:
         self.__inventory.list_inventory()
 
-    def quit(self):
+    def quit(self) -> None:
         exit()
