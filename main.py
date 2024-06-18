@@ -3,14 +3,11 @@ from room import Room
 from item import Item
 from character import Enemy, Friend
 
-kitchen = Room("kitchen")
-kitchen.description = "A dank and dirty room buzzing with flies"
-ballroom = Room("ballroom")
-ballroom.description = "A vast room with a shiny wooden floor"
-dining_hall = Room("dining hall")
-dining_hall.description = "A large room with ornate golden decorations"
-garden = Room("garden")
-garden.description = "You made it to the garden. You win!"
+kitchen = Room("kitchen", "A dank and dirty room buzzing with flies")
+ballroom = Room("ballroom", "A vast room with a shiny wooden floor")
+dining_hall = Room("dining hall",
+                   "A large room with ornate golden decorations")
+garden = Room("garden", "You made it to the garden. You win!")
 
 kitchen.two_way_link(dining_hall, "south")
 dining_hall.two_way_link(ballroom, "west")
