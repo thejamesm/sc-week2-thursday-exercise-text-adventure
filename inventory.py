@@ -4,7 +4,7 @@ class Inventory:
     def __init__(self) -> None:
         self.__items = []
 
-    def add_item(self, new_item) -> None:
+    def add_item(self, new_item: Item) -> None:
         if isinstance(new_item, Item):
             if new_item not in self.__items:
                 self.__items.append(new_item)
@@ -13,7 +13,7 @@ class Inventory:
         else:
             raise TypeError("Inventory can only contain Items")
 
-    def remove_item(self, dropped_item) -> None:
+    def remove_item(self, dropped_item: Item) -> None:
         if isinstance(dropped_item, Item):
             if dropped_item in self.__items:
                 self.__items.remove(dropped_item)

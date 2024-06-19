@@ -1,5 +1,6 @@
-from inventory import Inventory
+from room import Room
 from character import Enemy, Friend
+from inventory import Inventory
 
 class Game:
     directions = ("north", "east", "south", "west")
@@ -20,7 +21,7 @@ class Game:
         "exit": "quit"
     }
 
-    def __init__(self, start_room) -> None:
+    def __init__(self, start_room: Room) -> None:
         self.__room = start_room
         self.__inventory = Inventory()
         self.commands = {
@@ -45,7 +46,7 @@ class Game:
             print()
             self.execute_command(command)
 
-    def execute_command(self, command) -> None:
+    def execute_command(self, command: str) -> None:
         if command in Game.command_aliases:
             command = Game.command_aliases[command]
         if command in Game.directions:
@@ -55,7 +56,7 @@ class Game:
         else:
             print(f"I don't understand \"{command}\"")
 
-    def move(self, direction) -> None:
+    def move(self, direction: str) -> None:
         self.__room = self.__room.move(direction)
 
     def talk(self) -> None:

@@ -1,5 +1,5 @@
 class Item:
-    def __init__(self, item_name, item_description) -> None:
+    def __init__(self, item_name: str, item_description: str) -> None:
         self.name = item_name
         self.description = item_description
 
@@ -8,7 +8,7 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self, new_name) -> None:
+    def name(self, new_name: str) -> None:
         self.__name = new_name
 
     @property
@@ -16,7 +16,7 @@ class Item:
         return self.__description
 
     @description.setter
-    def description(self, new_description) -> None:
+    def description(self, new_description: str) -> None:
         self.__description = new_description
 
     def describe(self) -> None:

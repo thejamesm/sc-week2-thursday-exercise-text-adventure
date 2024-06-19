@@ -1,7 +1,7 @@
 from item import Item
 
 class Character:
-    def __init__(self, char_name, char_description) -> None:
+    def __init__(self, char_name: str, char_description: str) -> None:
         self.name = char_name
         self.description = char_description
         self.conversation = None
@@ -12,7 +12,7 @@ class Character:
         return self.__name
 
     @name.setter
-    def name(self, new_name) -> None:
+    def name(self, new_name: str) -> None:
         self.__name = new_name
 
     @property
@@ -20,7 +20,7 @@ class Character:
         return self.__description
 
     @description.setter
-    def description(self, new_description) -> None:
+    def description(self, new_description: str) -> None:
         self.__description = new_description
 
     @property
@@ -28,7 +28,7 @@ class Character:
         return self.__conversation
 
     @conversation.setter
-    def conversation(self, new_conversation) -> None:
+    def conversation(self, new_conversation: str) -> None:
         self.__conversation = new_conversation
 
     @property
@@ -36,7 +36,7 @@ class Character:
         return self.__item
 
     @item.setter
-    def item(self, new_item) -> None:
+    def item(self, new_item: Item) -> None:
         if isinstance(new_item, Item) or new_item is None:
             self.__item = new_item
         else:
@@ -52,7 +52,7 @@ class Character:
         else:
             print(self.name, "doesn't want to talk to you")
 
-    def fight(self, combat_item) -> tuple[bool, Item | None]:
+    def fight(self, combat_item: Item) -> tuple[bool, Item | None]:
         print(self.name, "doesn't want to fight with you")
         return True, None
 
@@ -68,7 +68,7 @@ class Character:
 
 
 class Enemy(Character):
-    def __init__(self, char_name, char_description) -> None:
+    def __init__(self, char_name: str, char_description: str) -> None:
         super().__init__(char_name, char_description)
         self.weakness = None
 
@@ -77,13 +77,13 @@ class Enemy(Character):
         return self.__weakness
 
     @weakness.setter
-    def weakness(self, item_weakness) -> None:
+    def weakness(self, item_weakness: Item) -> None:
         if isinstance(item_weakness, Item) or item_weakness is None:
             self.__weakness = item_weakness
         else:
             raise TypeError("Weakness must be an Item")
 
-    def fight(self, combat_item) -> tuple[bool, Item | None]:
+    def fight(self, combat_item: Item) -> tuple[bool, Item | None]:
         if combat_item == self.weakness:
             print(f"You fend {self.name} off with the {combat_item.name}")
             if self.item:
@@ -96,12 +96,12 @@ class Enemy(Character):
 
 
 class Friend(Character):
-    def __init__(self, char_name, char_description) -> None:
+    def __init__(self, char_name: str, char_description: str) -> None:
         super().__init__(char_name, char_description)
 
     def hug(self) -> None:
         print(f"You give {self.name} a big hug")
 
-    def fight(self, combat_item) -> tuple[bool, Item | None]:
+    def fight(self, combat_item: Item) -> tuple[bool, Item | None]:
         print("You would never fight a friend!")
         return True, None
