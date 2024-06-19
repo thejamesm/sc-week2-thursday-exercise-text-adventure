@@ -3,7 +3,6 @@ from character import Enemy, Friend
 from inventory import Inventory
 
 class Game:
-    directions: tuple[str, ...] = ("north", "east", "south", "west")
     command_aliases: dict[str, str] = {
         "n": "north",
         "e": "east",
@@ -49,7 +48,7 @@ class Game:
     def execute_command(self, command: str) -> None:
         if command in Game.command_aliases:
             command = Game.command_aliases[command]
-        if command in Game.directions:
+        if command in Room.directions:
             self.move(command)
         elif command in self.commands:
             self.commands[command]()
