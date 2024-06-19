@@ -61,14 +61,6 @@ class Room:
         else:
             raise TypeError("Key must be an Item")
 
-    @property
-    def character(self) -> Character | None:
-        return self.__character
-
-    @character.setter
-    def character(self, new_character) -> None:
-        self.__character = new_character
-
     def lock(self, key_item) -> None:
         self.locked = True
         self.key = key_item
@@ -84,6 +76,14 @@ class Room:
                 return False
         else:
             raise TypeError("Key must be an Item")
+
+    @property
+    def character(self) -> Character | None:
+        return self.__character
+
+    @character.setter
+    def character(self, new_character) -> None:
+        self.__character = new_character
 
     def describe(self) -> None:
         print(self.description)
