@@ -4,8 +4,8 @@ from character import Character
 from item import Item
 
 class Room:
-    directions = ("north", "east", "south", "west")
-    dir_opposites = {
+    directions: tuple[str, ...] = ("north", "east", "south", "west")
+    dir_opposites: dict[str, str] = {
         "north": "south",
         "east": "west",
         "south": "north",
@@ -13,12 +13,12 @@ class Room:
     }
 
     def __init__(self, room_name: str, room_description: str) -> None:
-        self.name = room_name
-        self.description = room_description
-        self.__linked_rooms = {}
-        self.locked = False
-        self.key = None
-        self.character = None
+        self.name: str = room_name
+        self.description: str = room_description
+        self.__linked_rooms: dict[str, Self] = {}
+        self.locked: bool = False
+        self.key: Item = None
+        self.character: Character = None
 
     @property
     def name(self) -> str:

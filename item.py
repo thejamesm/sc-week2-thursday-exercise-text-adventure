@@ -1,7 +1,7 @@
 class Item:
     def __init__(self, item_name: str, item_description: str) -> None:
-        self.name = item_name
-        self.description = item_description
+        self.name: str = item_name
+        self.description: str = item_description
 
     @property
     def name(self) -> str:

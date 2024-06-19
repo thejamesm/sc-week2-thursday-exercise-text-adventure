@@ -2,10 +2,10 @@ from item import Item
 
 class Character:
     def __init__(self, char_name: str, char_description: str) -> None:
-        self.name = char_name
-        self.description = char_description
-        self.conversation = None
-        self.item = None
+        self.name: str = char_name
+        self.description: str = char_description
+        self.conversation: str = None
+        self.item: Item = None
 
     @property
     def name(self) -> str:

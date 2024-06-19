@@ -2,7 +2,7 @@ from item import Item
 
 class Inventory:
     def __init__(self) -> None:
-        self.__items = []
+        self.__items: list[Item] = []
 
     def add_item(self, new_item: Item) -> None:
         if isinstance(new_item, Item):

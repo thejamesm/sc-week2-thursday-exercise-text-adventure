@@ -3,8 +3,8 @@ from character import Enemy, Friend
 from inventory import Inventory
 
 class Game:
-    directions = ("north", "east", "south", "west")
-    command_aliases = {
+    directions: tuple[str, ...] = ("north", "east", "south", "west")
+    command_aliases: dict[str, str] = {
         "n": "north",
         "e": "east",
         "s": "south",
@@ -22,9 +22,9 @@ class Game:
     }
 
     def __init__(self, start_room: Room) -> None:
-        self.__room = start_room
-        self.__inventory = Inventory()
-        self.commands = {
+        self.__room: Room = start_room
+        self.__inventory: Inventory = Inventory()
+        self.commands: dict[str, function] = {
             "move": self.move,
             "talk": self.talk,
             "fight": self.fight,
